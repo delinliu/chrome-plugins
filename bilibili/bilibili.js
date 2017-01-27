@@ -5,6 +5,7 @@ function main(){
 	hideAd();
 	toWideEntry();
 	bindKey();
+	scrollPage();
 }
 
 // hide advertisements
@@ -43,13 +44,20 @@ function bindKey(){
 	$(document).keydown(function(e){
 		if(e.ctrlKey == true){
 			if(e.shiftKey == true){
-				if(e.keyCode == 90){ // ctrl + shift + z
+				if(e.keyCode == 'Z'.charCodeAt(0)){ // ctrl + shift + z
 					$('[name=browser_fullscreen]')[0].click(); // full screen
 					$('[name=widescreen]')[0].click(); // if it quits full screen, set it to wide screen
-				}else if(e.keyCode == 88){ // ctrl + shift + x
+				}else if(e.keyCode == 'X'.charCodeAt(0)){ // ctrl + shift + x
 					$('[name=widescreen]')[0].click(); // wide screen
+				}else if(e.keyCode == 'A'.charCodeAt(0)){ // ctrl + shift + a
+					$('[name=pause_button]')[0].click();
 				}
 			}			
 		}
 	});
+}
+
+
+function scrollPage(){
+	$(document).scrollTop($('.nav-main').offset().top)
 }
