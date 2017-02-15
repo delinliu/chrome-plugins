@@ -2,10 +2,15 @@
 main();
 
 function main(){
+	addShadow();
 	hideAd();
 	toWideEntry();
 	bindKey();
 	scrollPage();
+}
+
+function addShadow(){
+	$('body').append('<div id="shadow-001" style="z-index:2147483647;bottom:0;position:fixed;height:0px;width:100%;background:black"></div>');
 }
 
 // hide advertisements
@@ -44,6 +49,7 @@ function bindKey(){
 	$(document).keydown(function(e){
 		if(e.ctrlKey == true){
 			if(e.shiftKey == true){
+				var shadowId = '#shadow-001';
 				if(e.keyCode == 'Z'.charCodeAt(0)){ // ctrl + shift + z
 					$('[name=browser_fullscreen]')[0].click(); // full screen
 					$('[name=widescreen]')[0].click(); // if it quits full screen, set it to wide screen
@@ -51,6 +57,24 @@ function bindKey(){
 					$('[name=widescreen]')[0].click(); // wide screen
 				}else if(e.keyCode == 'A'.charCodeAt(0)){ // ctrl + shift + a
 					$('[name=pause_button]')[0].click();
+				}else if(e.keyCode == '6'.charCodeAt(0)){ // ctrl + shift + 6
+					$(shadowId).height($(shadowId).height()+1);
+				}else if(e.keyCode == '7'.charCodeAt(0)){ // ctrl + shift + 7
+					$(shadowId).height($(shadowId).height()-1);
+				}else if(e.keyCode == '8'.charCodeAt(0)){ // ctrl + shift + 8
+					var length = $(shadowId).css('bottom').length;
+					var bottom = Number($(shadowId).css('bottom').substring(0, length-2));
+					bottom++;
+					$(shadowId).css('bottom', bottom + 'px');
+				}else if(e.keyCode == '9'.charCodeAt(0)){ // ctrl + shift + 9
+					var length = $(shadowId).css('bottom').length;
+					var bottom = Number($(shadowId).css('bottom').substring(0, length-2));
+					bottom--;
+					$(shadowId).css('bottom', bottom + 'px');
+				}else if(e.keyCode == '4'.charCodeAt(0)){ // ctrl + shift + 4
+					$(shadowId).css('display', 'block');
+				}else if(e.keyCode == '5'.charCodeAt(0)){ // ctrl + shift + 5
+					$(shadowId).css('display', 'none');
 				}
 			}			
 		}
