@@ -1,12 +1,41 @@
 
+var type;
 main();
 
 function main(){
-	addShadow();
-	hideAd();
-	toWideEntry();
-	bindKey();
-	scrollPage();
+	var mainUrl = location.href;
+	var videoReg = '^https?://www\\.bilibili\\.com/video/av.*';
+	var playerReg = '^https?://www\\.bilibili\\.com/html/html5player\\.html';
+	var animationReg = '^https?://www\\.bangumi\\.bilibili\\.com/anime/*';
+	console.log(mainUrl);
+	if(new RegExp(videoReg).test(mainUrl)){
+		type = 'video';
+		addShadow();
+		toWideEntry();
+		bindKey();
+		scrollPage();
+	}else if(new RegExp(playerReg).test(mainUrl)){
+		type = 'player';
+		addShadow();
+		toWideEntry();
+		bindKey();
+	}else if(new RegExp(animationReg).test(mainUrl)){
+		type = 'animation';
+		console.log('animation')
+	}
+}
+
+// it cannot be used because chrome security policy
+function waitPlayerLoaded(){
+	if($('.bilibiliHtml5Player')[0] === undefined){
+		setTimeout(waitPlayerLoaded, 10);
+	}else if($($('.bilibiliHtml5Player')[0].contentWindow.document).find('[name=widescreen]')[0] === undefined){
+		setTimeout(waitPlayerLoaded, 10);
+	}else{
+		$($('.bilibiliHtml5Player')[0].contentWindow.document).find('[name=widescreen]')
+		console.log($('.bilibiliHtml5Player')[0]);
+	}
+	//console.log($('.bilibiliHtml5Player')[0].contentWindow.document)
 }
 
 function addShadow(){
