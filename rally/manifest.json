@@ -1,0 +1,12 @@
+{
+	"name": "rally plugins",
+	"manifest_version": 2,
+	"version": "1.0",
+	"content_scripts":[
+	{
+		"matches": ["https://rally1.rallydev.com/*"],
+		"js": ["jquery-3.1.1.js", "rally.js"],
+	"all_frames": true
+	}
+	]
+}
